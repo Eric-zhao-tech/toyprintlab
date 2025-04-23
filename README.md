@@ -10,7 +10,3 @@ This is the official website for Eric’s Toy Print Lab, built using simple HTML
 - Safe, durable, and fun for outdoor play  
 - Great for gifts and party favors  
 - Designed and printed locally in Nova Scotia
-
-## 🌐 Website
-
-Visit the site here: [https://ericstoyprintlab.github.io](https://ericstoyprintlab.github.io)
