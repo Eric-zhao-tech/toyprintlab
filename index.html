@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Eric’s Toy Print Lab</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f0f4f8;
+      color: #333;
+    }
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 2rem;
+      background-color: #007acc;
+      color: white;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    header img {
+      height: 50px;
+    }
+    header h1 {
+      font-size: 1.8rem;
+      margin-left: 1rem;
+    }
+    .header-left {
+      display: flex;
+      align-items: center;
+    }
+
+    main {
+      padding: 2rem;
+      text-align: center;
+    }
+
+    .product {
+      background: white;
+      padding: 2rem;
+      border-radius: 10px;
+      max-width: 800px;
+      margin: 2rem auto;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+    }
+
+    .product img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 10px;
+      margin-top: 1rem;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+
+    .button {
+      display: inline-block;
+      margin-top: 1.5rem;
+      padding: 0.75rem 1.5rem;
+      background-color: #007acc;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      text-decoration: none;
+      font-size: 1rem;
+      transition: background-color 0.3s;
+      cursor: pointer;
+    }
+
+    .button:hover {
+      background-color: #005f99;
+    }
+
+    footer {
+      text-align: center;
+      padding: 1.5rem;
+      font-size: 0.9rem;
+      color: #666;
+      background-color: #eaeff3;
+      margin-top: 3rem;
+    }
+
+    /* Modal Style */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0,0,0,0.4);
+    }
+
+    .modal-content {
+      background-color: #fff;
+      margin: 10% auto;
+      padding: 2rem;
+      border-radius: 10px;
+      width: 90%;
+      max-width: 400px;
+      text-align: left;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+    }
+
+    .close {
+      float: right;
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+
+    @media (max-width: 600px) {
+      header h1 {
+        font-size: 1.2rem;
+      }
+      .product {
+        padding: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="header-left">
+      <img src="https://p.sda1.dev/23/88df2870df4f7fafaf3104ce7ed33487/未标题-1.png" alt="Logo">
+      <h1>Eric’s Toy Print Lab</h1>
+    </div>
+  </header>
+
+  <main>
+    <section class="product">
+      <h2>🚀 Propeller Launchers</h2>
+      <p>
+        Our propeller launchers are built with precision and care using high-quality 3D printing.  
+        Designed to be safe, durable, and fun for all ages, they’re perfect for outdoor play, party favors, and gifts!
+      </p>
+      <p>
+        Choose from a variety of vibrant colors. Each launcher is tested for performance and safety — we make sure they’re ready to fly!
+      </p>
+      <img src="https://p.sda1.dev/23/224490e802fa4382bfefebcaa7c96608/图片_20250423142409.jpg" alt="Propeller Launcher">
+      <button class="button" onclick="document.getElementById('contactModal').style.display='block'">Order Now</button>
+    </section>
+  </main>
+
+  <footer>
+    📍 Halifax, Nova Scotia &nbsp; | &nbsp; 📧 eric@toyprintlab.com
+  </footer>
+
+  <!-- Modal -->
+  <div id="contactModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="document.getElementById('contactModal').style.display='none'">&times;</span>
+      <h3>📦 Order Information</h3>
+      <p><strong>Phone:</strong> +1 902-414-5086</p>
+      <p><strong>Email:</strong> eric.zhaoxuechen@gmail.com</p>
+      <p><strong>Address:</strong> 76 Armenia Drive, Bedford, NS</p>
+    </div>
+  </div>
+
+  <script>
+    // Close modal when clicking outside
+    window.onclick = function(event) {
+      const modal = document.getElementById('contactModal');
+      if (event.target == modal) {
+        modal.style.display = "none";
+      }
+    }
+  </script>
+
+</body>
+</html>
