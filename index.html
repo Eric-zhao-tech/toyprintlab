@@ -12,29 +12,47 @@
       background-color: #f0f4f8;
       color: #333;
     }
+
     header {
+      position: fixed;
+      top: 0;
+      width: 100%;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 1rem 2rem;
+      padding: 0.5rem 2rem;
       background-color: #007acc;
       color: white;
       box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      z-index: 999;
+      transition: padding 0.3s ease;
     }
+
+    header.shrink {
+      padding: 0.3rem 1.5rem;
+    }
+
     header img {
-      height: 50px;
+      height: 40px;
+      transition: height 0.3s ease;
     }
+
+    header.shrink img {
+      height: 30px;
+    }
+
     header h1 {
-      font-size: 1.8rem;
+      font-size: 1.5rem;
       margin-left: 1rem;
     }
+
     .header-left {
       display: flex;
       align-items: center;
     }
 
     main {
-      padding: 2rem;
+      padding: 6rem 2rem 2rem;
       text-align: center;
     }
 
@@ -45,24 +63,25 @@
       max-width: 900px;
       margin: 2rem auto;
       box-shadow: 0 8px 16px rgba(0,0,0,0.1);
-    }
-
-    .option-section {
       display: flex;
       flex-wrap: wrap;
-      margin-top: 2rem;
-      text-align: left;
+      justify-content: center;
     }
 
-    .option-section img {
-      width: 300px;
+    .product img {
+      max-width: 300px;
+      height: auto; /* Ensure image maintains aspect ratio */
       border-radius: 10px;
       box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      cursor: pointer;
+      transition: transform 0.3s;
     }
 
     .options {
+      margin-left: 2rem;
+      text-align: left;
       flex: 1;
-      padding-left: 2rem;
+      min-width: 260px;
     }
 
     .choice {
@@ -74,11 +93,15 @@
       border-radius: 8px;
       cursor: pointer;
       transition: all 0.3s;
+      font-size: 1.1rem;
     }
 
-    .choice:hover, .choice.selected {
+    .choice:hover {
       border-color: #007acc;
-      background-color: #d0ecff;
+    }
+
+    .choice input {
+      margin-right: 0.5rem;
     }
 
     .price {
@@ -89,7 +112,7 @@
 
     .button {
       display: inline-block;
-      margin-top: 2rem;
+      margin-top: 1.5rem;
       padding: 0.75rem 1.5rem;
       background-color: #007acc;
       color: white;
@@ -114,50 +137,75 @@
       margin-top: 3rem;
     }
 
-    .modal {
+    /* Image Modal */
+    .img-modal {
       display: none;
       position: fixed;
-      z-index: 1000;
-      left: 0;
       top: 0;
+      left: 0;
       width: 100%;
       height: 100%;
-      overflow: auto;
-      background-color: rgba(0,0,0,0.4);
+      background-color: rgba(0,0,0,0.7);
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+      animation: fadeIn 0.3s ease;
     }
 
-    .modal-content {
-      background-color: #fff;
-      margin: 10% auto;
-      padding: 2rem;
+    .img-modal img {
+      max-width: 90%;
+      max-height: 80%;
       border-radius: 10px;
-      width: 90%;
-      max-width: 400px;
-      text-align: left;
-      box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+      animation: zoomIn 0.3s ease;
     }
 
-    .close {
-      float: right;
-      font-size: 1.5rem;
+    .close-modal {
+      position: absolute;
+      top: 30px;
+      right: 30px;
+      background: white;
+      border-radius: 50%;
+      width: 35px;
+      height: 35px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
       cursor: pointer;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+      z-index: 1001;
     }
 
-    @media (max-width: 768px) {
-      .option-section {
+    @keyframes fadeIn {
+      from {opacity: 0}
+      to {opacity: 1}
+    }
+
+    @keyframes zoomIn {
+      from {transform: scale(0.8);}
+      to {transform: scale(1);}
+    }
+
+    @media (max-width: 600px) {
+      .product {
         flex-direction: column;
         align-items: center;
       }
+
       .options {
-        padding-left: 0;
-        margin-top: 1rem;
+        margin-left: 0;
+        margin-top: 2rem;
+      }
+
+      header h1 {
+        font-size: 1.2rem;
       }
     }
   </style>
 </head>
 <body>
 
-  <header>
+  <header id="topbar">
     <div class="header-left">
       <img src="https://p.sda1.dev/23/88df2870df4f7fafaf3104ce7ed33487/未标题-1.png" alt="Logo">
       <h1>Eric’s Toy Print Lab</h1>
@@ -166,26 +214,28 @@
 
   <main>
     <section class="product">
-      <h2>Propeller Launchers</h2>
-      <p>
-        Our propeller launchers are built with precision and care using high-quality 3D printing.  
-        Designed to be safe, durable, and fun for all ages, they’re perfect for outdoor play, party favors, and gifts!
-      </p>
-      <p>
-        Choose from the following options:
-      </p>
+      <img src="https://p.sda1.dev/23/224490e802fa4382bfefebcaa7c96608/图片_20250423142409.jpg" alt="Propeller Launcher" id="product-img">
 
-      <div class="option-section">
-        <img src="https://p.sda1.dev/23/224490e802fa4382bfefebcaa7c96608/图片_20250423142409.jpg" alt="Propeller Launcher">
-        <div class="options">
-          <div class="choice" onclick="selectOption(0)">1 set with 1 propeller</div>
-          <div class="choice" onclick="selectOption(1)">1 set with 2 propellers</div>
-          <div class="choice" onclick="selectOption(2)">2 sets with 2 propellers</div>
-          <div class="price" id="priceDisplay">Price: $4.50 CAD</div>
-        </div>
+      <div class="options">
+        <h2>Propeller Launchers</h2>
+        <p>Our propeller launchers are built with precision and care using high-quality 3D printing. Designed to be safe, durable, and fun for all ages, they’re perfect for outdoor play, party favors, and gifts!</p>
+
+        <label class="choice">
+          <input type="radio" name="config" value="4.5" checked>
+          1 set with 1 propeller
+        </label>
+        <label class="choice">
+          <input type="radio" name="config" value="5.5">
+          1 set with 2 propellers
+        </label>
+        <label class="choice">
+          <input type="radio" name="config" value="7.5">
+          2 sets with 2 propellers
+        </label>
+
+        <div class="price" id="priceDisplay">$4.50 CAD</div>
+        <button class="button" onclick="document.getElementById('contactModal').style.display='block'">Order Now</button>
       </div>
-
-      <button class="button" onclick="document.getElementById('contactModal').style.display='block'">Order Now</button>
     </section>
   </main>
 
@@ -193,8 +243,8 @@
     📍 Halifax, Nova Scotia &nbsp; | &nbsp; 📧 eric.zhaoxuechen@gmail.com
   </footer>
 
-  <!-- Modal -->
-  <div id="contactModal" class="modal">
+  <!-- Contact Modal -->
+  <div id="contactModal" class="modal" style="display:none">
     <div class="modal-content">
       <span class="close" onclick="document.getElementById('contactModal').style.display='none'">&times;</span>
       <h3>📦 Order Information</h3>
@@ -204,29 +254,49 @@
     </div>
   </div>
 
+  <!-- Image Modal -->
+  <div class="img-modal" id="imgModal">
+    <span class="close-modal" onclick="document.getElementById('imgModal').style.display='none'">×</span>
+    <img id="modalImg" src="" alt="Zoomed Image">
+  </div>
+
   <script>
-    const prices = ["$4.50 CAD", "$5.50 CAD", "$7.50 CAD"];
-    const choices = document.querySelectorAll('.choice');
-    const priceDisplay = document.getElementById('priceDisplay');
-
-    function selectOption(index) {
-      choices.forEach((choice, i) => {
-        choice.classList.toggle('selected', i === index);
-      });
-      priceDisplay.textContent = "Price: " + prices[index];
-    }
-
-    // Default selected
-    selectOption(0);
-
-    // Close modal if click outside
-    window.onclick = function(event) {
-      const modal = document.getElementById('contactModal');
-      if (event.target == modal) {
-        modal.style.display = "none";
+    // Topbar shrink on scroll
+    window.onscroll = function () {
+      const header = document.getElementById('topbar');
+      if (window.scrollY > 10) {
+        header.classList.add('shrink');
+      } else {
+        header.classList.remove('shrink');
       }
-    }
-  </script>
+    };
 
+    // Price update on selection
+    const radios = document.querySelectorAll('input[name="config"]');
+    const priceDisplay = document.getElementById("priceDisplay");
+
+    radios.forEach(radio => {
+      radio.addEventListener('change', () => {
+        priceDisplay.textContent = `$${parseFloat(radio.value).toFixed(2)} CAD`;
+      });
+    });
+
+    // Image modal
+    const productImg = document.getElementById('product-img');
+    const imgModal = document.getElementById('imgModal');
+    const modalImg = document.getElementById('modalImg');
+
+    productImg.onclick = () => {
+      modalImg.src = productImg.src;
+      imgModal.style.display = "flex";
+    };
+
+    // Close image modal when clicking outside image
+    imgModal.onclick = (e) => {
+      if (e.target === imgModal) {
+        imgModal.style.display = "none";
+      }
+    };
+  </script>
 </body>
 </html>
