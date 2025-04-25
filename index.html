@@ -42,22 +42,54 @@
       background: white;
       padding: 2rem;
       border-radius: 10px;
-      max-width: 800px;
+      max-width: 900px;
       margin: 2rem auto;
       box-shadow: 0 8px 16px rgba(0,0,0,0.1);
     }
 
-    .product img {
-      max-width: 100%;
-      height: auto;
+    .option-section {
+      display: flex;
+      flex-wrap: wrap;
+      margin-top: 2rem;
+      text-align: left;
+    }
+
+    .option-section img {
+      width: 300px;
       border-radius: 10px;
-      margin-top: 1rem;
       box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+
+    .options {
+      flex: 1;
+      padding-left: 2rem;
+    }
+
+    .choice {
+      display: block;
+      background-color: #eaf6ff;
+      padding: 1rem;
+      margin-bottom: 1rem;
+      border: 2px solid transparent;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .choice:hover, .choice.selected {
+      border-color: #007acc;
+      background-color: #d0ecff;
+    }
+
+    .price {
+      font-size: 1.3rem;
+      font-weight: bold;
+      margin-top: 1rem;
     }
 
     .button {
       display: inline-block;
-      margin-top: 1.5rem;
+      margin-top: 2rem;
       padding: 0.75rem 1.5rem;
       background-color: #007acc;
       color: white;
@@ -82,7 +114,6 @@
       margin-top: 3rem;
     }
 
-    /* Modal Style */
     .modal {
       display: none;
       position: fixed;
@@ -112,64 +143,14 @@
       cursor: pointer;
     }
 
-    /* Product Configurator */
-    .config-section {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      align-items: flex-start;
-      margin-top: 3rem;
-      gap: 2rem;
-      background: white;
-      border-radius: 10px;
-      padding: 2rem;
-      box-shadow: 0 8px 16px rgba(0,0,0,0.1);
-    }
-
-    .config-image img {
-      max-width: 300px;
-      border-radius: 10px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    }
-
-    .config-options {
-      max-width: 350px;
-      text-align: left;
-    }
-
-    .config-options h2 {
-      font-size: 1.5rem;
-      margin-bottom: 1rem;
-    }
-
-    .config-options button {
-      display: block;
-      width: 100%;
-      margin: 0.5rem 0;
-      padding: 0.75rem;
-      font-size: 1rem;
-      border: 2px solid #007acc;
-      border-radius: 8px;
-      background-color: white;
-      cursor: pointer;
-      transition: all 0.3s;
-    }
-
-    .config-options button:hover {
-      background-color: #007acc;
-      color: white;
-    }
-
-    .price-display {
-      margin-top: 1rem;
-      font-weight: bold;
-      font-size: 1.2rem;
-    }
-
-    @media (max-width: 700px) {
-      .config-section {
+    @media (max-width: 768px) {
+      .option-section {
         flex-direction: column;
         align-items: center;
+      }
+      .options {
+        padding-left: 0;
+        margin-top: 1rem;
       }
     }
   </style>
@@ -191,26 +172,20 @@
         Designed to be safe, durable, and fun for all ages, they’re perfect for outdoor play, party favors, and gifts!
       </p>
       <p>
-        Choose from a variety of vibrant colors. Each launcher is tested for performance and safety — we make sure they’re ready to fly!
+        Choose from the following options:
       </p>
-      <img src="https://p.sda1.dev/23/224490e802fa4382bfefebcaa7c96608/图片_20250423142409.jpg" alt="Propeller Launcher">
-      <button class="button" onclick="document.getElementById('contactModal').style.display='block'">Order Now</button>
-    </section>
 
-    <!-- Configurator Section -->
-    <section class="config-section">
-      <div class="config-image">
+      <div class="option-section">
         <img src="https://p.sda1.dev/23/224490e802fa4382bfefebcaa7c96608/图片_20250423142409.jpg" alt="Propeller Launcher">
-      </div>
-      <div class="config-options">
-        <h2>Select Your Set</h2>
-        <button onclick="selectOption(1)">1 set with 1 propeller – $4.50 CAD</button>
-        <button onclick="selectOption(2)">1 set with 2 propellers – $5.50 CAD</button>
-        <button onclick="selectOption(3)">2 sets with 2 propellers – $7.50 CAD</button>
-        <div class="price-display">
-          Price: <span id="price">$4.50 CAD</span>
+        <div class="options">
+          <div class="choice" onclick="selectOption(0)">1 set with 1 propeller</div>
+          <div class="choice" onclick="selectOption(1)">1 set with 2 propellers</div>
+          <div class="choice" onclick="selectOption(2)">2 sets with 2 propellers</div>
+          <div class="price" id="priceDisplay">Price: $4.50 CAD</div>
         </div>
       </div>
+
+      <button class="button" onclick="document.getElementById('contactModal').style.display='block'">Order Now</button>
     </section>
   </main>
 
@@ -230,25 +205,25 @@
   </div>
 
   <script>
+    const prices = ["$4.50 CAD", "$5.50 CAD", "$7.50 CAD"];
+    const choices = document.querySelectorAll('.choice');
+    const priceDisplay = document.getElementById('priceDisplay');
+
+    function selectOption(index) {
+      choices.forEach((choice, i) => {
+        choice.classList.toggle('selected', i === index);
+      });
+      priceDisplay.textContent = "Price: " + prices[index];
+    }
+
+    // Default selected
+    selectOption(0);
+
+    // Close modal if click outside
     window.onclick = function(event) {
       const modal = document.getElementById('contactModal');
       if (event.target == modal) {
         modal.style.display = "none";
-      }
-    }
-
-    function selectOption(option) {
-      const priceText = document.getElementById('price');
-      switch(option) {
-        case 1:
-          priceText.textContent = "$4.50 CAD";
-          break;
-        case 2:
-          priceText.textContent = "$5.50 CAD";
-          break;
-        case 3:
-          priceText.textContent = "$7.50 CAD";
-          break;
       }
     }
   </script>
