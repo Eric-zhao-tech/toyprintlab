@@ -112,49 +112,66 @@
       cursor: pointer;
     }
 
-    @media (max-width: 600px) {
-      header h1 {
-        font-size: 1.2rem;
+    /* Product Configurator */
+    .config-section {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: flex-start;
+      margin-top: 3rem;
+      gap: 2rem;
+      background: white;
+      border-radius: 10px;
+      padding: 2rem;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+    }
+
+    .config-image img {
+      max-width: 300px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+
+    .config-options {
+      max-width: 350px;
+      text-align: left;
+    }
+
+    .config-options h2 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .config-options button {
+      display: block;
+      width: 100%;
+      margin: 0.5rem 0;
+      padding: 0.75rem;
+      font-size: 1rem;
+      border: 2px solid #007acc;
+      border-radius: 8px;
+      background-color: white;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .config-options button:hover {
+      background-color: #007acc;
+      color: white;
+    }
+
+    .price-display {
+      margin-top: 1rem;
+      font-weight: bold;
+      font-size: 1.2rem;
+    }
+
+    @media (max-width: 700px) {
+      .config-section {
+        flex-direction: column;
+        align-items: center;
       }
-      .product {
-        padding: 1rem;
-      }
     }
-      .configurator {
-        padding: 2rem;
-        border: 2px solid #ddd;
-        border-radius: 12px;
-        background-color: #f9f9f9;
-        max-width: 500px;
-        margin: 2rem auto;
-        text-align: center;
-    }
-
-      .options button {
-        display: block;
-        width: 100%;
-        margin: 0.5rem 0;
-        padding: 0.75rem;
-        border: 2px solid #0077cc;
-        background-color: white;
-        font-size: 1rem;
-        cursor: pointer;
-        border-radius: 8px;
-        transition: all 0.3s;
-    }
-
-      .options button:hover {
-        background-color: #0077cc;
-        color: white;
-    }
-
-      .price-display {
-        margin-top: 1.5rem;
-        font-size: 1.2rem;
-        font-weight: bold;
-        color: #333;
-    }
-
   </style>
 </head>
 <body>
@@ -179,36 +196,22 @@
       <img src="https://p.sda1.dev/23/224490e802fa4382bfefebcaa7c96608/图片_20250423142409.jpg" alt="Propeller Launcher">
       <button class="button" onclick="document.getElementById('contactModal').style.display='block'">Order Now</button>
     </section>
-    <section class="configurator">
-      <h2>Select Your Propeller Launcher Set</h2>
 
-      <div class="options">
+    <!-- Configurator Section -->
+    <section class="config-section">
+      <div class="config-image">
+        <img src="https://p.sda1.dev/23/224490e802fa4382bfefebcaa7c96608/图片_20250423142409.jpg" alt="Propeller Launcher">
+      </div>
+      <div class="config-options">
+        <h2>Select Your Set</h2>
         <button onclick="selectOption(1)">1 set with 1 propeller – $4.50 CAD</button>
         <button onclick="selectOption(2)">1 set with 2 propellers – $5.50 CAD</button>
         <button onclick="selectOption(3)">2 sets with 2 propellers – $7.50 CAD</button>
-      </div>
-
-      <div class="price-display">
-        <p>Price: <span id="price">$4.50 CAD</span></p>
+        <div class="price-display">
+          Price: <span id="price">$4.50 CAD</span>
+        </div>
       </div>
     </section>
-
-    <script>
-      function selectOption(option) {
-        const priceText = document.getElementById('price');
-        switch(option) {
-          case 1:
-            priceText.textContent = "$4.50 CAD";
-            break;
-          case 2:
-            priceText.textContent = "$5.50 CAD";
-            break;
-          case 3:
-            priceText.textContent = "$7.50 CAD";
-            break;
-        }
-      }
-    </script>
   </main>
 
   <footer>
@@ -227,11 +230,25 @@
   </div>
 
   <script>
-    // Close modal when clicking outside
     window.onclick = function(event) {
       const modal = document.getElementById('contactModal');
       if (event.target == modal) {
         modal.style.display = "none";
+      }
+    }
+
+    function selectOption(option) {
+      const priceText = document.getElementById('price');
+      switch(option) {
+        case 1:
+          priceText.textContent = "$4.50 CAD";
+          break;
+        case 2:
+          priceText.textContent = "$5.50 CAD";
+          break;
+        case 3:
+          priceText.textContent = "$7.50 CAD";
+          break;
       }
     }
   </script>
