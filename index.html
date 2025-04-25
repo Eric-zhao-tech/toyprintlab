@@ -69,7 +69,7 @@
     }
 
     .product img {
-      max-width: 300px;
+      max-width: 100%;
       height: auto; /* Ensure image maintains aspect ratio */
       border-radius: 10px;
       box-shadow: 0 4px 8px rgba(0,0,0,0.1);
@@ -214,12 +214,13 @@
 
   <main>
     <section class="product">
-      <div class="options">
+      <div class="product-left" style="flex: 1;">
         <h2>Propeller Launchers</h2>
         <p style="text-align:center; font-size: 1rem; margin-bottom: 2rem;">Our propeller launchers are built with precision and care using high-quality 3D printing. Designed to be safe, durable, and fun for all ages, they’re perfect for outdoor play, party favors, and gifts!</p>
 
-        <img src="https://p.sda1.dev/23/224490e802fa4382bfefebcaa7c96608/图片_20250423142409.jpg" alt="Propeller Launcher" id="product-img">
-
+        <img src="https://p.sda1.dev/23/224490e802fa4382bfefebcaa7c96608/图片_20250423142409.jpg" alt="Propeller Launcher" id="product-img" onclick="openModal()">
+      </div>
+      <div class="options" style="flex: 1; text-align: left; padding-left: 2rem;">
         <label class="choice">
           <input type="radio" name="config" value="4.5" checked>
           1 set with 1 propeller
@@ -286,10 +287,10 @@
     const imgModal = document.getElementById('imgModal');
     const modalImg = document.getElementById('modalImg');
 
-    productImg.onclick = () => {
+    function openModal() {
       modalImg.src = productImg.src;
       imgModal.style.display = "flex";
-    };
+    }
 
     // Close image modal when clicking outside image
     imgModal.onclick = (e) => {
