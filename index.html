@@ -120,6 +120,41 @@
         padding: 1rem;
       }
     }
+      .configurator {
+        padding: 2rem;
+        border: 2px solid #ddd;
+        border-radius: 12px;
+        background-color: #f9f9f9;
+        max-width: 500px;
+        margin: 2rem auto;
+        text-align: center;
+    }
+
+      .options button {
+        display: block;
+        width: 100%;
+        margin: 0.5rem 0;
+        padding: 0.75rem;
+        border: 2px solid #0077cc;
+        background-color: white;
+        font-size: 1rem;
+        cursor: pointer;
+        border-radius: 8px;
+        transition: all 0.3s;
+    }
+
+      .options button:hover {
+        background-color: #0077cc;
+        color: white;
+    }
+
+      .price-display {
+        margin-top: 1.5rem;
+        font-size: 1.2rem;
+        font-weight: bold;
+        color: #333;
+    }
+
   </style>
 </head>
 <body>
@@ -144,6 +179,36 @@
       <img src="https://p.sda1.dev/23/224490e802fa4382bfefebcaa7c96608/图片_20250423142409.jpg" alt="Propeller Launcher">
       <button class="button" onclick="document.getElementById('contactModal').style.display='block'">Order Now</button>
     </section>
+    <section class="configurator">
+      <h2>Select Your Propeller Launcher Set</h2>
+
+      <div class="options">
+        <button onclick="selectOption(1)">1 set with 1 propeller – $4.50 CAD</button>
+        <button onclick="selectOption(2)">1 set with 2 propellers – $5.50 CAD</button>
+        <button onclick="selectOption(3)">2 sets with 2 propellers – $7.50 CAD</button>
+      </div>
+
+      <div class="price-display">
+        <p>Price: <span id="price">$4.50 CAD</span></p>
+      </div>
+    </section>
+
+    <script>
+      function selectOption(option) {
+        const priceText = document.getElementById('price');
+        switch(option) {
+          case 1:
+            priceText.textContent = "$4.50 CAD";
+            break;
+          case 2:
+            priceText.textContent = "$5.50 CAD";
+            break;
+          case 3:
+            priceText.textContent = "$7.50 CAD";
+            break;
+        }
+      }
+    </script>
   </main>
 
   <footer>
